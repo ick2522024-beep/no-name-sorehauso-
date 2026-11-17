@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f0e7">
+  <meta name="description" content="千葉県市川市に残る国指定史跡、曽谷貝塚。縄文の暮らしと、この土地に積み重なった時間を紹介します。">
+  <title>曽谷貝塚 — 縄文の記憶が眠る丘</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Noto+Serif+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f3f0e7;
+      --paper-deep: #e8e2d3;
+      --ink: #242a24;
+      --muted: #77786d;
+      --line: #d7d2c4;
+      --green: #36483b;
+      --green-deep: #26372e;
+      --rust: #a34f36;
+      --gold: #c4a46e;
+      --serif: "Noto Serif JP", "Yu Mincho", serif;
+      --mono: "DM Mono", monospace;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 85px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--serif); }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    img, svg { display: block; max-width: 100%; }
+    .wrap { width: min(1240px, calc(100% - 96px)); margin-inline: auto; }
+    .mono, .eyebrow { font-family: var(--mono); }
+    .eyebrow { font-size: 10px; letter-spacing: .16em; }
+    .topline { display: flex; min-height: 34px; align-items: center; justify-content: center; background: var(--green-deep); color: #e9e3d6; font-family: var(--mono); font-size: 9px; letter-spacing: .12em; }
+    .header { position: sticky; z-index: 5; top: 0; border-bottom: 1px solid var(--line); background: rgba(243,240,231,.96); backdrop-filter: blur(12px); }
+    .nav { min-height: 78px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand-mark { width: 35px; height: 35px; display: grid; place-items: center; border: 1px solid var(--green); border-radius: 50%; color: var(--green); font-size: 17px; }
+    .brand-name { display: flex; flex-direction: column; gap: 3px; }
+    .brand-name strong { font-size: 15px; font-weight: 600; letter-spacing: .12em; }
+    .brand-name span { color: var(--muted); font-family: var(--mono); font-size: 8px; letter-spacing: .12em; }
+    .nav-links { display: flex; align-items: center; gap: 31px; padding: 0; margin: 0; list-style: none; }
+    .nav-links a, .nav-visit { font-size: 11px; transition: color .2s ease; }
+    .nav-links a:hover, .nav-visit:hover { color: var(--rust); }
+    .nav-visit { justify-self: end; display: inline-flex; gap: 12px; align-items: center; }
+    .nav-visit::after { content: "↗"; color: var(--rust); font-size: 15px; }
+    .menu-toggle { display: none; }
+
+    .hero { position: relative; min-height: 650px; overflow: hidden; background: var(--green-deep); color: var(--paper); }
+    .hero::before, .hero::after { position: absolute; content: ""; pointer-events: none; }
+    .hero::before { inset: 0; opacity: .21; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.22'/%3E%3C/svg%3E"); }
+    .hero::after { width: 610px; height: 610px; right: 7%; top: 50%; border: 1px solid rgba(228,215,185,.18); border-radius: 50%; transform: translateY(-50%); }
+    .hero-inner { position: relative; z-index: 1; min-height: 650px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; }
+    .hero-copy { position: relative; z-index: 2; padding-block: 74px; }
+    .hero .eyebrow { color: #d5bc8b; }
+    .hero h1 { margin: 26px 0 19px; font-size: clamp(42px, 5.2vw, 70px); font-weight: 500; line-height: 1.65; letter-spacing: .11em; }
+    .hero h1 span { color: #d9b786; }
+    .hero-lead { margin: 0; color: rgba(243,240,231,.78); font-size: 13px; line-height: 2.25; letter-spacing: .04em; }
+    .hero-link { display: inline-flex; align-items: center; gap: 27px; margin-top: 37px; padding-bottom: 10px; border-bottom: 1px solid rgba(243,240,231,.55); font-size: 11px; letter-spacing: .08em; }
+    .hero-link span { color: #d9b786; font-size: 16px; }
+    .hero-art { position: relative; z-index: 1; display: grid; place-items: center; min-height: 540px; }
+    .hero-art svg { width: min(100%, 560px); filter: drop-shadow(0 22px 40px rgba(0,0,0,.18)); }
+    .hero-stamp { position: absolute; right: 0; bottom: 76px; width: 75px; height: 75px; display: grid; place-items: center; border: 1px solid rgba(217,183,134,.8); border-radius: 50%; color: #d9b786; font-size: 12px; line-height: 1.65; text-align: center; transform: rotate(9deg); }
+    .hero-number { position: absolute; right: 0; bottom: 23px; color: rgba(243,240,231,.55); font-family: var(--mono); font-size: 9px; letter-spacing: .13em; }
+
+    .facts { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: -1px; border: 1px solid var(--line); border-top: 0; background: var(--paper); }
+    .fact { min-height: 114px; display: flex; flex-direction: column; justify-content: center; padding: 20px 28px; }
+    .fact + .fact { border-left: 1px solid var(--line); }
+    .fact .eyebrow { color: var(--rust); font-size: 9px; }
+    .fact strong { margin-top: 8px; font-size: 14px; font-weight: 500; letter-spacing: .04em; }
+
+    .intro { display: grid; grid-template-columns: .9fr 1.1fr; gap: 10%; padding-block: 121px 125px; align-items: start; }
+    .section-kicker { display: flex; align-items: center; gap: 13px; color: var(--rust); }
+    .section-kicker::before { width: 28px; height: 1px; background: currentColor; content: ""; }
+    .intro h2, .section-title { margin: 22px 0 0; font-size: clamp(25px, 3vw, 36px); font-weight: 500; line-height: 1.85; letter-spacing: .06em; }
+    .intro-copy { max-width: 580px; padding-top: 39px; }
+    .intro-copy p { margin: 0 0 18px; color: #565a51; font-size: 12px; line-height: 2.4; }
+    .inline-link { display: inline-flex; gap: 16px; align-items: center; margin-top: 12px; padding-bottom: 8px; border-bottom: 1px solid var(--ink); font-size: 10px; letter-spacing: .08em; }
+    .inline-link span { color: var(--rust); font-size: 15px; }
+
+    .story { padding: 88px 0 99px; background: var(--paper-deep); }
+    .section-head { display: flex; align-items: end; justify-content: space-between; margin-bottom: 39px; }
+    .section-head .section-kicker { color: var(--rust); }
+    .section-head .section-title { margin-top: 8px; }
+    .section-note { margin: 0 0 7px; color: var(--muted); font-size: 10px; letter-spacing: .04em; }
+    .story-grid { display: grid; grid-template-columns: 1.14fr 1fr 1fr; gap: 19px; }
+    .story-card { min-width: 0; padding: 25px 24px 23px; border: 1px solid #d5cfbf; background: rgba(243,240,231,.44); }
+    .story-card:first-child { background: var(--green); color: var(--paper); }
+    .story-visual { position: relative; height: 178px; display: grid; place-items: center; overflow: hidden; background: #e1dbc9; }
+    .story-card:first-child .story-visual { background: #455849; }
+    .story-visual svg { width: 100%; height: 100%; }
+    .story-card .eyebrow { display: block; margin-top: 23px; color: var(--rust); font-size: 9px; }
+    .story-card:first-child .eyebrow { color: #d7b783; }
+    .story-card h3 { margin: 10px 0 9px; font-size: 17px; font-weight: 500; letter-spacing: .04em; }
+    .story-card p { margin: 0; color: #696a60; font-size: 10px; line-height: 2.05; }
+    .story-card:first-child p { color: rgba(243,240,231,.72); }
+
+    .landscape { display: grid; grid-template-columns: 1fr 1fr; min-height: 520px; background: var(--green); color: var(--paper); }
+    .landscape-art { min-height: 520px; display: grid; place-items: center; padding: 50px; overflow: hidden; background: #d9d3c4; }
+    .landscape-art svg { width: min(100%, 570px); }
+    .landscape-copy { display: flex; flex-direction: column; justify-content: center; padding: 77px clamp(36px, 8vw, 120px); }
+    .landscape-copy .eyebrow { color: #d9b786; }
+    .landscape-copy h2 { margin: 18px 0 17px; font-size: 30px; font-weight: 500; line-height: 1.8; letter-spacing: .06em; }
+    .landscape-copy p { max-width: 410px; margin: 0; color: rgba(243,240,231,.76); font-size: 11px; line-height: 2.35; }
+    .landscape-copy .inline-link { align-self: flex-start; margin-top: 28px; border-color: rgba(243,240,231,.55); }
+    .landscape-copy .inline-link span { color: #d9b786; }
+
+    .visit { padding-block: 105px 112px; }
+    .visit-top { display: flex; justify-content: space-between; align-items: end; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+    .visit-top .section-kicker { color: var(--rust); }
+    .visit-top .section-title { margin-top: 9px; }
+    .visit-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+    .visit-item { padding: 24px 26px 24px 0; border-bottom: 1px solid var(--line); }
+    .visit-item + .visit-item { padding-left: 26px; border-left: 1px solid var(--line); }
+    .visit-item h3 { margin: 0 0 12px; font-size: 11px; font-weight: 600; }
+    .visit-item p { margin: 0; color: #616259; font-size: 10px; line-height: 2.15; }
+    .map-panel { position: relative; grid-column: 1 / -1; min-height: 255px; display: grid; place-items: center; margin-top: 25px; overflow: hidden; border: 1px solid var(--line); background-color: #e8e4d8; background-image: linear-gradient(rgba(111,124,99,.09) 1px, transparent 1px), linear-gradient(90deg, rgba(111,124,99,.09) 1px, transparent 1px); background-size: 32px 32px; }
+    .map-panel::before, .map-panel::after { position: absolute; width: 160%; height: 1px; background: rgba(114,132,100,.32); content: ""; transform: rotate(-17deg); }
+    .map-panel::after { transform: rotate(21deg); }
+    .map-road { position: absolute; width: 180%; height: 10px; border-block: 1px solid rgba(163,79,54,.25); background: rgba(243,240,231,.72); transform: rotate(-7deg); }
+    .map-label { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 10px; padding: 19px 24px; border: 1px solid rgba(54,72,59,.28); background: rgba(243,240,231,.94); text-align: center; }
+    .map-pin { width: 33px; height: 33px; display: grid; place-items: center; border-radius: 50% 50% 50% 0; background: var(--rust); color: white; font-family: var(--mono); font-size: 13px; transform: rotate(-45deg); }
+    .map-pin span { transform: rotate(45deg); }
+    .map-label strong { font-size: 14px; font-weight: 500; letter-spacing: .06em; }
+    .map-label small { color: var(--muted); font-size: 9px; }
+    .visit-note { margin: 16px 0 0; color: var(--muted); font-size: 9px; line-height: 1.9; }
+
+    .footer { padding: 43px 0 22px; background: #222b24; color: var(--paper); }
+    .footer-main { display: flex; justify-content: space-between; align-items: start; padding-bottom: 39px; }
+    .footer .brand-mark { border-color: rgba(243,240,231,.55); color: var(--paper); }
+    .footer .brand-name span { color: rgba(243,240,231,.58); }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 20px 29px; font-size: 10px; }
+    .footer-links a:hover { color: #d9b786; }
+    .footer-bottom { display: flex; justify-content: space-between; gap: 15px; padding-top: 16px; border-top: 1px solid rgba(243,240,231,.2); color: rgba(243,240,231,.58); font-family: var(--mono); font-size: 8px; letter-spacing: .08em; }
+
+    @media (max-width: 800px) {
+      .wrap { width: min(100% - 44px, 620px); }
+      .nav { min-height: 70px; grid-template-columns: 1fr auto 1fr; }
+      .menu-toggle { width: 36px; height: 36px; display: grid; place-items: center; justify-self: start; border: 0; background: none; color: var(--ink); cursor: pointer; }
+      .menu-toggle span, .menu-toggle span::before, .menu-toggle span::after { display: block; width: 19px; height: 1px; background: currentColor; }
+      .menu-toggle span { position: relative; }
+      .menu-toggle span::before, .menu-toggle span::after { position: absolute; left: 0; content: ""; }
+      .menu-toggle span::before { top: -6px; }
+      .menu-toggle span::after { top: 6px; }
+      .brand { justify-self: center; }
+      .nav-links { position: absolute; top: 69px; right: 0; left: 0; display: none; padding: 22px 25px 25px; border-bottom: 1px solid var(--line); background: var(--paper); flex-direction: column; align-items: flex-start; gap: 21px; }
+      .nav-links.is-open { display: flex; }
+      .nav-visit { font-size: 0; }
+      .nav-visit::after { font-size: 19px; }
+      .hero, .hero-inner { min-height: 730px; }
+      .hero-inner { grid-template-columns: 1fr; align-content: center; }
+      .hero-copy { padding: 66px 0 0; }
+      .hero h1 { font-size: clamp(39px, 8vw, 57px); }
+      .hero-art { position: absolute; right: -40px; bottom: -57px; width: 58%; min-height: 0; opacity: .74; }
+      .hero-art svg { width: 100%; }
+      .hero::after { width: 390px; height: 390px; right: -75px; top: auto; bottom: -30px; transform: none; }
+      .hero-stamp { right: 5px; bottom: 46px; }
+      .hero-number { bottom: 15px; }
+      .facts { grid-template-columns: 1fr 1fr; }
+      .fact { min-height: 95px; padding: 17px 19px; }
+      .fact:nth-child(3) { border-left: 0; }
+      .fact:nth-child(n+3) { border-top: 1px solid var(--line); }
+      .fact strong { font-size: 12px; }
+      .intro { grid-template-columns: 1fr; gap: 7px; padding-block: 83px 88px; }
+      .intro-copy { padding-top: 13px; }
+      .story { padding: 66px 0 74px; }
+      .story-grid { grid-template-columns: 1fr 1fr; gap: 14px; }
+      .story-card:first-child { grid-column: 1 / -1; }
+      .story-card { padding: 18px; }
+      .story-visual { height: 145px; }
+      .story-card h3 { font-size: 15px; }
+      .section-title { font-size: 27px; }
+      .section-note { max-width: 150px; text-align: right; line-height: 1.8; }
+      .landscape { grid-template-columns: 1fr; }
+      .landscape-art { min-height: 0; aspect-ratio: 1.2 / 1; padding: 28px; }
+      .landscape-copy { min-height: 390px; padding: 55px 11vw; }
+      .visit { padding-block: 76px 83px; }
+      .visit-grid { grid-template-columns: 1fr 1fr; }
+      .visit-item { padding-right: 14px; }
+      .visit-item + .visit-item { padding-left: 14px; }
+      .visit-item:last-of-type { grid-column: 1 / -1; padding-left: 0; border-left: 0; }
+      .map-panel { min-height: 210px; }
+      .footer-main { flex-direction: column; gap: 27px; }
+      .footer-links { justify-content: flex-start; }
+    }
+    @media (max-width: 460px) {
+      .wrap { width: calc(100% - 36px); }
+      .topline { font-size: 8px; }
+      .hero, .hero-inner { min-height: 670px; }
+      .hero-copy { padding-top: 35px; }
+      .hero h1 { font-size: 38px; }
+      .hero-lead { font-size: 11px; }
+      .hero-art { right: -35px; bottom: -33px; width: 65%; }
+      .hero-stamp { width: 61px; height: 61px; right: 0; bottom: 42px; font-size: 10px; }
+      .section-head { align-items: start; }
+      .section-title { font-size: 23px; }
+      .section-note { max-width: 110px; font-size: 9px; }
+      .story-grid { gap: 10px; }
+      .story-card { padding: 14px; }
+      .story-visual { height: 115px; }
+      .story-card h3 { font-size: 13px; line-height: 1.7; }
+      .story-card p { font-size: 9px; }
+      .story-card .eyebrow { font-size: 8px; }
+      .landscape-copy h2 { font-size: 26px; }
+      .visit-top { align-items: start; flex-direction: column; gap: 15px; }
+      .footer-bottom { flex-direction: column; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topline">CHIBA · ICHIKAWA　—　国指定史跡　曽谷貝塚</div>
+  <header class="header">
+    <nav class="nav wrap" aria-label="メインナビゲーション">
+      <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false"><span></span></button>
+      <ul class="nav-links">
+        <li><a href="#about">曽谷貝塚について</a></li>
+        <li><a href="#story">縄文の暮らし</a></li>
+        <li><a href="#visit">訪れる</a></li>
+      </ul>
+      <a class="brand" href="#top" aria-label="曽谷貝塚 トップ">
+        <span class="brand-mark" aria-hidden="true">貝</span>
+        <span class="brand-name"><strong>曽谷貝塚</strong><span>SOYA SHELL MOUND</span></span>
+      </a>
+      <a class="nav-visit" href="#visit">アクセス <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-inner wrap">
+        <div class="hero-copy">
+          <span class="eyebrow">A JŌMON STORY IN ICHIKAWA</span>
+          <h1 id="hero-title">貝の層に、<br><span>縄文の時間。</span></h1>
+          <p class="hero-lead">市川のまちに、そっと残された縄文の丘。<br>ひとつひとつの貝殻から、遠い暮らしが見えてくる。</p>
+          <a class="hero-link" href="#about">曽谷貝塚を知る <span>↘</span></a>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <svg viewBox="0 0 560 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="280" cy="260" r="217" stroke="#D8C8A8" stroke-opacity=".38"/>
+            <circle cx="280" cy="260" r="183" stroke="#D8C8A8" stroke-opacity=".22"/>
+            <path d="M75 310C123 295 142 246 189 248C234 249 244 299 292 289C337 280 351 221 398 229C435 235 453 268 480 270" stroke="#D9B786" stroke-width="2"/>
+            <path d="M68 332C126 318 152 281 193 283C239 286 249 322 296 313C344 303 365 253 407 257C445 261 462 287 486 293" stroke="#D9B786" stroke-opacity=".7" stroke-width="1.5"/>
+            <path d="M85 355C139 348 165 317 204 319C240 321 262 348 303 337C346 326 371 291 414 288C445 286 466 302 483 312" stroke="#D9B786" stroke-opacity=".48"/>
+            <path d="M95 374C152 370 176 345 211 348C250 351 271 369 309 361C349 353 380 323 415 318C444 314 463 326 477 335" stroke="#D9B786" stroke-opacity=".3"/>
+            <path d="M165 249C165 176 219 117 281 117C346 117 396 170 396 238C396 273 382 303 363 326" stroke="#F0E9D8" stroke-width="1.2" stroke-dasharray="3 7"/>
+            <path d="M280 117V72M165 249H117M396 238H443" stroke="#D9B786" stroke-opacity=".7"/>
+            <circle cx="280" cy="117" r="4" fill="#D9B786"/>
+            <text x="281" y="58" fill="#E8DDC6" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" text-anchor="middle">JŌMON · LATE PERIOD</text>
+            <text x="280" y="426" fill="#E8DDC6" font-family="Noto Serif JP, serif" font-size="19" letter-spacing="5" text-anchor="middle">貝塚は、暮らしの痕跡。</text>
+            <path d="M238 210C238 186 257 167 280 167C304 167 323 186 323 210C323 226 313 239 307 250C301 261 298 269 298 279H262C262 269 259 261 253 250C247 239 238 226 238 210Z" fill="#D9B786" fill-opacity=".16" stroke="#D9B786" stroke-width="1.3"/>
+            <path d="M262 288H298M266 298H294M272 308H288" stroke="#D9B786" stroke-width="1.5" stroke-linecap="round"/>
+            <path d="M264 192C270 185 281 182 291 186" stroke="#F0E9D8" stroke-opacity=".75" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="hero-stamp" aria-hidden="true">千葉<br>市川</div>
+        <div class="hero-number">35°44′N　/　139°56′E</div>
+      </div>
+    </section>
+
+    <section class="facts wrap" aria-label="曽谷貝塚の概要">
+      <div class="fact"><span class="eyebrow">LOCATION</span><strong>千葉県市川市曽谷</strong></div>
+      <div class="fact"><span class="eyebrow">PERIOD</span><strong>縄文時代後期</strong></div>
+      <div class="fact"><span class="eyebrow">DESIGNATION</span><strong>国指定史跡</strong></div>
+      <div class="fact"><span class="eyebrow">DISCOVER</span><strong>貝塚から知る、縄文の暮らし</strong></div>
+    </section>
+
+    <section class="intro wrap" id="about" aria-labelledby="about-title">
+      <div>
+        <div class="section-kicker eyebrow">ABOUT SOYA</div>
+        <h2 id="about-title">街の足もとに眠る、<br>およそ数千年前の暮らし。</h2>
+      </div>
+      <div class="intro-copy">
+        <p>曽谷貝塚は、千葉県市川市曽谷にある縄文時代後期の貝塚です。貝塚は、当時の人びとが食べた貝や動物の骨、土器などが積み重なった場所。日々の営みを今に伝える、いわば「暮らしの記録」です。</p>
+        <p>ここに残された痕跡を手がかりに、縄文の人びとが何を食べ、どんな環境で暮らしていたのかを想像してみませんか。曽谷貝塚は、地域の歴史を伝える国指定史跡です。</p>
+        <a class="inline-link" href="#story">貝塚から見えること <span aria-hidden="true">↘</span></a>
+      </div>
+    </section>
+
+    <section class="story" id="story" aria-labelledby="story-title">
+      <div class="wrap">
+        <div class="section-head">
+          <div><span class="section-kicker eyebrow">TRACES OF LIFE</span><h2 class="section-title" id="story-title">貝塚が語る、三つのこと。</h2></div>
+          <p class="section-note">土の中の小さな手がかりから、<br>縄文の風景をたどります。</p>
+        </div>
+        <div class="story-grid">
+          <article class="story-card">
+            <div class="story-visual" aria-hidden="true">
+              <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 113C49 102 73 123 119 111C164 99 185 112 228 104C280 95 315 113 400 91V180H0Z" fill="#A88F68"/>
+                <path d="M0 129C54 121 76 139 126 128C176 118 201 131 252 120C309 108 344 129 400 112V180H0Z" fill="#856C50"/>
+                <path d="M0 147C59 139 97 155 150 144C206 132 238 151 290 137C332 126 365 145 400 134V180H0Z" fill="#665844"/>
+                <path d="M42 111C48 95 63 95 69 109C62 117 50 120 42 111ZM98 116C102 101 117 98 124 111C118 121 107 124 98 116ZM167 108C173 92 187 93 194 105C188 116 177 119 167 108ZM257 105C263 89 278 91 284 103C278 114 266 117 257 105ZM328 102C334 88 349 89 356 101C350 112 337 115 328 102Z" fill="#F0E4C9" stroke="#D1B78B"/>
+                <path d="M30 80C84 67 127 89 178 76C239 61 280 86 372 65" stroke="#D9B786" stroke-opacity=".65" stroke-dasharray="3 6"/>
+                <text x="200" y="35" fill="#EDE3D1" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" text-anchor="middle">LAYERS OF TIME</text>
+              </svg>
+            </div>
+            <span class="eyebrow">01 / STRATA</span>
+            <h3>積み重なった食の記録</h3>
+            <p>貝殻や骨などが重なる貝塚。地層を調べることで、当時の食べものや環境を知る手がかりが得られます。</p>
+          </article>
+          <article class="story-card">
+            <div class="story-visual" aria-hidden="true">
+              <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="180" fill="#E1DBC9"/>
+                <path d="M95 115C95 106 103 102 106 92L111 59C112 52 119 48 127 51L144 58C153 62 163 62 172 58L190 51C198 48 205 53 206 60L211 93C213 103 222 107 222 117C222 141 194 151 158 151C122 151 95 140 95 115Z" fill="#AD6045"/>
+                <path d="M109 64C137 76 180 76 207 64M103 101C137 114 184 114 215 101M100 121C128 138 190 139 218 120" stroke="#E8C597" stroke-width="3" fill="none"/>
+                <path d="M122 82L135 88L127 97L141 101M175 83L186 89L178 98L192 102" stroke="#E8C597" stroke-width="2" fill="none"/>
+                <path d="M74 151H254" stroke="#9D927E"/>
+                <circle cx="287" cy="72" r="30" fill="#F2EBDD" stroke="#9D927E"/>
+                <path d="M269 72H305M287 54V90M275 60L299 84M299 60L275 84" stroke="#A34F36" stroke-opacity=".6"/>
+                <text x="200" y="30" fill="#77786D" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" text-anchor="middle">POTTERY &amp; TOOLS</text>
+              </svg>
+            </div>
+            <span class="eyebrow">02 / OBJECTS</span>
+            <h3>土器に残る、手のあと</h3>
+            <p>土器や道具のかけらは、つくる技術や日々の工夫を伝えます。小さな破片にも、人の営みが刻まれています。</p>
+          </article>
+          <article class="story-card">
+            <div class="story-visual" aria-hidden="true">
+              <svg viewBox="0 0 400 180" xmlns="http://www.w3.org/2000/svg">
+                <rect width="400" height="180" fill="#E1DBC9"/>
+                <circle cx="199" cy="88" r="57" fill="#D4C9B2"/>
+                <circle cx="199" cy="88" r="44" fill="none" stroke="#A34F36" stroke-width="1.5" stroke-dasharray="2 5"/>
+                <circle cx="199" cy="88" r="30" fill="none" stroke="#A34F36" stroke-width="1.5"/>
+                <circle cx="199" cy="88" r="7" fill="#A34F36"/>
+                <path d="M199 21V42M199 134V155M132 88H153M245 88H266M151 40L166 55M232 121L247 136M247 40L232 55M166 121L151 136" stroke="#536B54" stroke-width="1.5"/>
+                <path d="M77 128C106 116 115 97 137 87M264 87C288 96 298 117 323 128" stroke="#536B54" stroke-width="1.5" stroke-dasharray="4 5"/>
+                <text x="200" y="29" fill="#77786D" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" text-anchor="middle">PEOPLE &amp; PLACE</text>
+              </svg>
+            </div>
+            <span class="eyebrow">03 / LANDSCAPE</span>
+            <h3>土地とともにある歴史</h3>
+            <p>遺跡は、かつての自然や人びとの営みを今のまちへつなぐ場所。足もとの風景を見つめ直すきっかけになります。</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="landscape" aria-labelledby="landscape-title">
+      <div class="landscape-art" aria-hidden="true">
+        <svg viewBox="0 0 560 390" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect width="560" height="390" fill="#D9D3C4"/>
+          <path d="M0 225C89 198 127 207 204 179C280 152 354 171 435 142C480 126 519 130 560 115V390H0V225Z" fill="#819078"/>
+          <path d="M0 257C90 229 129 239 205 210C282 182 359 199 438 173C486 158 523 161 560 148V390H0V257Z" fill="#A88F68"/>
+          <path d="M0 294C92 266 134 278 210 246C284 216 361 236 440 208C488 191 525 197 560 181V390H0V294Z" fill="#896F52"/>
+          <path d="M0 334C86 308 137 321 212 285C289 250 366 271 446 239C493 220 527 227 560 213V390H0V334Z" fill="#665844"/>
+          <path d="M42 218C48 204 61 203 67 216C61 225 50 227 42 218ZM132 202C138 187 151 187 158 200C151 210 140 212 132 202ZM218 184C224 169 238 170 244 182C238 193 226 195 218 184ZM317 178C323 163 337 164 343 176C337 187 325 189 317 178ZM414 153C420 139 434 139 440 151C434 162 422 165 414 153ZM490 159C496 145 508 145 515 157C509 167 498 170 490 159Z" fill="#EDE2CC" stroke="#C9AE80"/>
+          <path d="M24 161C104 145 147 165 226 139C309 112 389 139 535 98" stroke="#526B53" stroke-width="1.5" stroke-dasharray="4 7"/>
+          <path d="M53 121V92M53 92L44 106M53 92L62 106M513 117V83M513 83L504 98M513 83L522 98" stroke="#526B53" stroke-width="1.5"/>
+          <circle cx="53" cy="75" r="18" stroke="#526B53"/>
+          <circle cx="513" cy="64" r="18" stroke="#526B53"/>
+          <path d="M63 304C117 278 148 291 203 268C254 247 297 259 346 244" stroke="#D9B786" stroke-opacity=".8"/>
+          <text x="280" y="365" fill="#F3F0E7" font-family="DM Mono, monospace" font-size="10" letter-spacing="2" text-anchor="middle">A LANDSCAPE WRITTEN IN LAYERS</text>
+        </svg>
+      </div>
+      <div class="landscape-copy">
+        <span class="eyebrow">READ THE LAND</span>
+        <h2 id="landscape-title">丘の上に、<br>続いてきた時間。</h2>
+        <p>貝塚を訪れたら、遺跡だけでなく周囲の地形や景色にも目を向けてみてください。地面の起伏や土地の広がりが、ここで続いてきた時間を想像する手がかりになるかもしれません。</p>
+        <a class="inline-link" href="#visit">現地への行きかた <span aria-hidden="true">↘</span></a>
+      </div>
+    </section>
+
+    <section class="visit wrap" id="visit" aria-labelledby="visit-title">
+      <div class="visit-top">
+        <div><span class="section-kicker eyebrow">COME &amp; EXPLORE</span><h2 class="section-title" id="visit-title">曽谷貝塚を訪ねる</h2></div>
+        <a class="inline-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9B%BD%E8%B0%B7%E8%B2%9D%E5%A1%9A" target="_blank" rel="noopener noreferrer">地図で場所を確認 <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-item"><h3>所在地</h3><p>千葉県市川市曽谷<br>曽谷貝塚（国指定史跡）</p></div>
+        <div class="visit-item"><h3>訪問の前に</h3><p>公開状況や現地案内の最新情報は、市川市の公式情報をご確認ください。</p></div>
+        <div class="visit-item"><h3>現地でのお願い</h3><p>周辺は地域の暮らしの場です。史跡を大切にし、近隣の方へのご配慮をお願いします。</p></div>
+        <a class="map-panel" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%9B%BD%E8%B0%B7%E8%B2%9D%E5%A1%9A" target="_blank" rel="noopener noreferrer" aria-label="Google マップで曽谷貝塚の場所を確認">
+          <span class="map-road" aria-hidden="true"></span>
+          <span class="map-label"><span class="map-pin" aria-hidden="true"><span>貝</span></span><strong>曽谷貝塚</strong><small>千葉県市川市曽谷</small></span>
+        </a>
+      </div>
+      <p class="visit-note">このページは曽谷貝塚を紹介する案内サイトです。現地の公開状況・見学方法・交通情報は変更される場合があります。訪問前に市川市の公式サイト等でご確認ください。</p>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <div class="footer-main">
+        <a class="brand" href="#top" aria-label="曽谷貝塚 トップ">
+          <span class="brand-mark" aria-hidden="true">貝</span>
+          <span class="brand-name"><strong>曽谷貝塚</strong><span>SOYA SHELL MOUND · ICHIKAWA</span></span>
+        </a>
+        <div class="footer-links"><a href="#about">曽谷貝塚について</a><a href="#story">縄文の暮らし</a><a href="#visit">訪れる</a><a href="https://www.city.ichikawa.lg.jp/" target="_blank" rel="noopener noreferrer">市川市公式サイト ↗</a></div>
+      </div>
+      <div class="footer-bottom"><span>ANCIENT TRACES, LIVING TOWN.</span><span>CHIBA · ICHIKAWA · SOYA</span></div>
+    </div>
+  </footer>
+  <script>
+    const menuButton = document.querySelector('.menu-toggle');
+    const navigation = document.querySelector('.nav-links');
+
+    menuButton.addEventListener('click', () => {
+      const isExpanded = menuButton.getAttribute('aria-expanded') === 'true';
+      menuButton.setAttribute('aria-expanded', String(!isExpanded));
+      menuButton.setAttribute('aria-label', isExpanded ? 'メニューを開く' : 'メニューを閉じる');
+      navigation.classList.toggle('is-open', !isExpanded);
+    });
+
+    navigation.addEventListener('click', (event) => {
+      if (event.target.closest('a')) {
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'メニューを開く');
+        navigation.classList.remove('is-open');
+      }
+    });
+  </script>
+</body>
+</html>
